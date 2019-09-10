@@ -7,6 +7,7 @@ import Message from 'Components/Message';
 import Tabs from 'Components/Tabs';
 import Videos from 'Components/Videos';
 import Section from 'Components/Section';
+import SeasonPoster from 'Components/SeasonPoster';
 
 const Container = styled.div`
   height: calc(100vh - 50px);
@@ -206,6 +207,29 @@ const DetailPresenter = ({ result, loading, error, isMovie }) =>
                 ''
               )}
             </div>
+            {!isMovie ? (
+              <div tabId="seasons" label="Seasons">
+                {result.seasons && result.seasons.length > 0 ? (
+                  <Section title="">
+                    {result.seasons.map(season => (
+                      <SeasonPoster
+                        key={season.id}
+                        imageUrl={season.poster_path}
+                        seasonNumber={season.season_number}
+                        episodeCount={season.episode_count}
+                        year={
+                          season.air_date ? season.air_date.substring(0, 4) : ''
+                        }
+                      />
+                    ))}
+                  </Section>
+                ) : (
+                  ''
+                )}
+              </div>
+            ) : (
+              ''
+            )}
           </Tabs>
         </Data>
       </Content>
