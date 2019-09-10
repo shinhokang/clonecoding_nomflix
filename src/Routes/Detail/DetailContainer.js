@@ -37,6 +37,8 @@ export default class extends React.Component {
     try {
       if (isMovie) {
         ({ data: result } = await moviesApi.movieDetail(parsedId));
+      } else {
+        ({ data: result } = await moviesApi.tvDetail(parsedId));
       }
     } catch {
       this.setState({
