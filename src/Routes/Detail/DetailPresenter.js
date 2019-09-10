@@ -6,6 +6,7 @@ import Loader from 'Components/Loader';
 import Message from 'Components/Message';
 import Tabs from 'Components/Tabs';
 import Videos from 'Components/Videos';
+import Section from 'Components/Section';
 
 const Container = styled.div`
   height: calc(100vh - 50px);
@@ -79,6 +80,11 @@ const Overview = styled.p`
   opacity: 0.7;
   line-height: 1.5;
   width: 50%;
+`;
+
+const Production = styled.div`
+  border: 0.5px dotted #ccc;
+  padding: 5px;
 `;
 
 const DetailPresenter = ({ result, loading, error, isMovie }) =>
@@ -169,7 +175,26 @@ const DetailPresenter = ({ result, loading, error, isMovie }) =>
               </Videos>
             </div>
             <div tabId="production" label="Production">
-              After &apos;while, <em>Crocodile</em>!
+              {result.production_companies &&
+              result.production_companies.length > 0 ? (
+                <Section title="Production Companies">
+                  {result.production_companies.map(company => (
+                    <Production key={company.id}>{company.name}</Production>
+                  ))}
+                </Section>
+              ) : (
+                ''
+              )}
+              {result.production_countries &&
+              result.production_countries.length > 0 ? (
+                <Section title="Production Countries">
+                  {result.production_countries.map(country => (
+                    <Production key={country.id}>{country.name}</Production>
+                  ))}
+                </Section>
+              ) : (
+                ''
+              )}
             </div>
           </Tabs>
         </Data>
