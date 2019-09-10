@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Helmet from 'react-helmet';
 import Loader from 'Components/Loader';
 import Message from 'Components/Message';
+import Tabs from 'Components/Tabs';
 
 const Container = styled.div`
   height: calc(100vh - 50px);
@@ -146,6 +147,17 @@ const DetailPresenter = ({ result, loading, error, isMovie }) =>
             </Item>
           </ItemContainer>
           <Overview>{result.overview}</Overview>
+          <Tabs>
+            <div tabId="Gator" label="Gator">
+              See ya later, <em>Alligator</em>!
+            </div>
+            <div tabId="Croc" label="Croc">
+              After &apos;while, <em>Crocodile</em>!
+            </div>
+            <div tabId="Sarcosuchus" label="Sarcosuchus">
+              Nothing to see here, this tab is <em>extinct</em>!
+            </div>
+          </Tabs>
         </Data>
       </Content>
       {error && <Message color="#e74c3c" text={error} />}
