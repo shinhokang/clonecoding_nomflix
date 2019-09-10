@@ -169,7 +169,7 @@ const DetailPresenter = ({ result, loading, error, isMovie }) =>
                       type="text/html"
                       width="320"
                       height="180"
-                      src={`http://www.youtube.com/embed/${video.key}`}
+                      src={`https://www.youtube.com/embed/${video.key}`}
                       frameBorder="0"
                     />
                   ))}
