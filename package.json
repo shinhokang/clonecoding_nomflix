@@ -48,6 +48,7 @@
       }
     }
   },
+  "homepage": "https://upbeat-roentgen-d7b968.netlify.com",
   "browserslist": {
     "production": [
       ">0.2%",
