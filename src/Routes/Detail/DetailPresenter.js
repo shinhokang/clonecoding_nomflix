@@ -185,11 +185,21 @@ const DetailPresenter = ({ result, loading, error, isMovie }) =>
               ) : (
                 ''
               )}
-              {result.production_countries &&
+              {isMovie &&
+              result.production_countries &&
               result.production_countries.length > 0 ? (
                 <Section title="Production Countries">
                   {result.production_countries.map(country => (
                     <Production key={country.id}>{country.name}</Production>
+                  ))}
+                </Section>
+              ) : (
+                ''
+              )}
+              {!isMovie && result.created_by && result.created_by.length > 0 ? (
+                <Section title="Creators">
+                  {result.created_by.map(creator => (
+                    <Production key={creator.id}>{creator.name}</Production>
                   ))}
                 </Section>
               ) : (

@@ -12,7 +12,9 @@ const TabList = styled.ol`
   padding-left: 0;
 `;
 
-const TabContent = styled.div``;
+const TabContent = styled.div`
+  margin-top: 10px;
+`;
 
 class Tabs extends Component {
   constructor(props) {
