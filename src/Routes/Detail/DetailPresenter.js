@@ -5,6 +5,7 @@ import Helmet from 'react-helmet';
 import Loader from 'Components/Loader';
 import Message from 'Components/Message';
 import Tabs from 'Components/Tabs';
+import Videos from 'Components/Videos';
 
 const Container = styled.div`
   height: calc(100vh - 50px);
@@ -96,7 +97,7 @@ const DetailPresenter = ({ result, loading, error, isMovie }) =>
         </title>
       </Helmet>
       <Backdrop
-        bgImage={`https://image.tmdb.org/t/p/original${result.backdrop_pagh}`}
+        bgImage={`https://image.tmdb.org/t/p/original${result.backdrop_path}`}
       />
       <Content>
         <Cover
@@ -148,14 +149,27 @@ const DetailPresenter = ({ result, loading, error, isMovie }) =>
           </ItemContainer>
           <Overview>{result.overview}</Overview>
           <Tabs>
-            <div tabId="Gator" label="Gator">
-              See ya later, <em>Alligator</em>!
+            <div tabId="videos" label="Videos">
+              <Videos>
+                {result.videos &&
+                  result.videos.results &&
+                  result.videos.results.length > 0 &&
+                  result.videos.results.map((video, index) => (
+                    <iframe
+                      title={video.name + index}
+                      key={video.id}
+                      id="ytplayer"
+                      type="text/html"
+                      width="320"
+                      height="180"
+                      src={`http://www.youtube.com/embed/${video.key}`}
+                      frameBorder="0"
+                    />
+                  ))}
+              </Videos>
             </div>
-            <div tabId="Croc" label="Croc">
+            <div tabId="production" label="Production">
               After &apos;while, <em>Crocodile</em>!
-            </div>
-            <div tabId="Sarcosuchus" label="Sarcosuchus">
-              Nothing to see here, this tab is <em>extinct</em>!
             </div>
           </Tabs>
         </Data>
