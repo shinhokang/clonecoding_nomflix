@@ -39,25 +39,29 @@ class Tabs extends Component {
     return (
       <Container>
         <TabList>
-          {children.map(child => {
-            const { label, tabId } = child.props;
+          {children
+            .filter(child => child)
+            .map(child => {
+              const { label, tabId } = child.props;
 
-            return (
-              <Tab
-                activeTab={activeTab}
-                key={label}
-                tabId={tabId}
-                label={label}
-                onClick={onClickTabItem}
-              />
-            );
-          })}
+              return (
+                <Tab
+                  activeTab={activeTab}
+                  key={label}
+                  tabId={tabId}
+                  label={label}
+                  onClick={onClickTabItem}
+                />
+              );
+            })}
         </TabList>
         <TabContent>
-          {children.map(child => {
-            if (child.props.tabId !== activeTab) return undefined;
-            return child.props.children;
-          })}
+          {children
+            .filter(child => child)
+            .map(child => {
+              if (child.props.tabId !== activeTab) return undefined;
+              return child.props.children;
+            })}
         </TabContent>
       </Container>
     );

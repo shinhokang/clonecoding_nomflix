@@ -227,9 +227,7 @@ const DetailPresenter = ({ result, loading, error, isMovie }) =>
                   ''
                 )}
               </div>
-            ) : (
-              ''
-            )}
+            ) : null}
           </Tabs>
         </Data>
       </Content>
