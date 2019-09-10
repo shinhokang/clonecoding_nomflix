@@ -48,9 +48,19 @@ const Data = styled.div`
   margin-left: 10px;
 `;
 
+const TitleContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const Title = styled.h3`
   font-size: 32px;
+  margin-right: 10px;
 `;
+
+const ImdbLink = styled.a``;
+
+const ImdbImg = styled.img``;
 
 const ItemContainer = styled.div`
   margin: 20px 0;
@@ -69,7 +79,7 @@ const Overview = styled.p`
   width: 50%;
 `;
 
-const DetailPresenter = ({ result, loading, error }) =>
+const DetailPresenter = ({ result, loading, error, isMovie }) =>
   loading ? (
     <>
       <Helmet>
@@ -81,8 +91,7 @@ const DetailPresenter = ({ result, loading, error }) =>
     <Container>
       <Helmet>
         <title>
-          {result.original_title ? result.original_title : result.original_name}{' '}
-          | Nomflix
+          {isMovie ? result.original_title : result.original_name} | Nomflix
         </title>
       </Helmet>
       <Backdrop
@@ -97,20 +106,34 @@ const DetailPresenter = ({ result, loading, error }) =>
           }
         />
         <Data>
-          <Title>
-            {result.original_title
-              ? result.original_title
-              : result.original_name}
-          </Title>
+          <TitleContainer>
+            <Title>
+              {isMovie ? result.original_title : result.original_name}
+            </Title>
+            {result.imdb_id ? (
+              <ImdbLink
+                href={`https://imdb.com/title/${result.imdb_id}`}
+                target="_blank"
+              >
+                <ImdbImg
+                  src={require('../../assets/IMDB_Logo_2016.svg')}
+                  width="40"
+                  height="20"
+                />
+              </ImdbLink>
+            ) : (
+              ''
+            )}
+          </TitleContainer>
           <ItemContainer>
             <Item>
-              {result.release_date
+              {isMovie
                 ? result.release_date.substring(0, 4)
                 : result.first_air_date.substring(0, 4)}
             </Item>
             <Divider>•</Divider>
             <Item>
-              {result.runtime ? result.runtime : result.episode_run_time[0]} min
+              {isMovie ? result.runtime : result.episode_run_time[0]} min
             </Item>
             <Divider>•</Divider>
             <Item>
@@ -132,6 +155,7 @@ DetailPresenter.propTypes = {
   result: PropTypes.object,
   loading: PropTypes.bool.isRequired,
   error: PropTypes.string,
+  isMovie: PropTypes.bool,
 };
 
 export default DetailPresenter;
